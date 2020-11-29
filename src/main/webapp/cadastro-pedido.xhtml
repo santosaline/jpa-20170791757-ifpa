@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Testes JPA+JSF</title>
+</h:head>
+<h:body>
+	<h1>
+		<p:outputLabel id="titulo" value="#{clienteMB.cliente.id}" />
+	</h1>
+				<p:commandButton
+					action="#{pedidoMB.pagCliente}" value="Voltar para Clientes" >
+				</p:commandButton>
+
+	
+	<h:form id="formulario">
+		<p:panel id="panel" header="Pedido">
+			<p:focus context="panel" />
+
+			<h:panelGrid id="dados" columns="2">
+
+				
+				<p:selectOneMenu value="#{pedidoMB.pedido.nomeProduto}">
+					<f:selectItem itemLabel="Produto" itemValue="" />
+					<f:selectItem itemLabel="Celular R$ 800,00" itemValue="celular" />
+					<f:selectItem itemLabel="Notebook R$ 5000,00" itemValue="notebook" />
+					<f:selectItem itemLabel="Tablet R$ 400,00" itemValue="tablet" />
+				</p:selectOneMenu>
+				
+				<p:selectOneMenu value="#{pedidoMB.pedido.quantidade}">
+					<f:selectItem itemLabel="quantidade" itemValue="" />
+					<f:selectItem itemLabel="1" itemValue="1" />
+					<f:selectItem itemLabel="2" itemValue="2" />
+					<f:selectItem itemLabel="3" itemValue="3" />
+				</p:selectOneMenu>
+			
+			</h:panelGrid>
+			
+
+			<h:commandButton id="salvar" value="Fazer pedido"
+				action="#{pedidoMB.salvar}" />
+				
+	
+
+			<p:messages />
+
+			<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+
+		</p:panel>
+	</h:form>
+
+	<h2>
+		<p:outputLabel id="titulo-lista" value="Lista de Produtos" />
+	</h2>
+
+	<h:form>
+		<p:dataTable id="pedidosList" var="ped" value="#{pedidoMB.pedidos}"
+			rows="6" paginator="true">
+			<p:column headerText="Id">
+				<h:outputText value="#{ped.id}" />
+			</p:column>
+			<p:column headerText="Nome do Produto">
+				<h:outputText value="#{ped.nomeProduto}" />
+			</p:column>
+			<p:column headerText="Quantidade">
+				<h:outputText value="#{ped.quantidade}" />
+			</p:column>
+			<p:column headerText="Valor Total">
+				<h:outputText value="#{ped.valorTotal}" />
+			</p:column>
+			
+			<p:column headerText="Operações">
+				<p:commandButton update="formulario" value="Alterar" icon="fa-edit"
+					actionListener="#{pedidoMB.update(ped.id)}" ajax="true"
+					styleClass="ui-priority-primary">
+				</p:commandButton>
+				<p:commandButton update="pedidosList formulario" value="Excluir"
+					icon="ui-icon-closethick"
+					actionListener="#{pedidoMB.delete(ped.id)}" ajax="true"
+					styleClass="ui-priority-primary">
+					<p:confirm header="Confirmação" message="Confirma a exclusão?"
+						icon="pi pi-exclamation-triangle" />
+				</p:commandButton>
+				
+				
+			</p:column>
+		</p:dataTable>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Sim" type="button"
+				styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+			<p:commandButton value="Nao" type="button"
+				styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>
+
+	</h:form>
+</h:body>
+</html>
