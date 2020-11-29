@@ -14,9 +14,9 @@
 		
 		<!-- Credenciais do meu banco de dados -->
 			
-			<property name="hibernate.connection.url" value="jdbc:postgresql://Host:5432/Database?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-	        <property name="hibernate.connection.username" value="User"/>
-	        <property name="hibernate.connection.password" value="Password"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://ec2-54-157-4-216.compute-1.amazonaws.com:5432/dcbreo3a9unvqb"/>
+	        <property name="hibernate.connection.username" value="wjhtdkmjtsogka"/>
+	        <property name="hibernate.connection.password" value="28888911c10029b9aa352e90d83b341fa35720850303a2f0f819da17881b8a8f"/>
 	        
 	        
 	    
